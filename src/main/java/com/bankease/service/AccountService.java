@@ -16,10 +16,8 @@ import com.bankease.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
-import java.nio.channels.AcceptPendingException;
 import java.security.SecureRandom;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AccountService {

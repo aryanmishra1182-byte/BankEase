@@ -14,11 +14,21 @@ public class Users {
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String fullname;
-    @Column(unique = true)
-    String email;
-    String phone;
-    String password;
-    String role;
-    String status;
+    @Column(nullable = false)
+    private String fullname;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String role;
+
+    @Column(nullable = false)
+    private String status;
 }

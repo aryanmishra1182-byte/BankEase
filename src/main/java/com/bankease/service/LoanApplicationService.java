@@ -65,7 +65,9 @@ public class LoanApplicationService {
                 savedApplication.getPurpose(),
                 savedApplication.getStatus(),
                 savedApplication.getRemarks(),
-                savedApplication.getAppliedAt()
+                savedApplication.getAppliedAt(),
+                savedApplication.getUser().getFullname(),
+                savedApplication.getUser().getEmail()
         );
     }
     public List<LoanApplicationResponseDTO> getUserApplications(
@@ -89,7 +91,9 @@ public class LoanApplicationService {
                         application.getPurpose(),
                         application.getStatus(),
                         application.getRemarks(),
-                        application.getAppliedAt()
+                        application.getAppliedAt(),
+                        application.getUser().getFullname(),
+                        application.getUser().getEmail()
                 ))
                 .toList();
     }
@@ -121,7 +125,9 @@ public class LoanApplicationService {
                 application.getPurpose(),
                 application.getStatus(),
                 application.getRemarks(),
-                application.getAppliedAt()
+                application.getAppliedAt(),
+                application.getUser().getFullname(),
+                application.getUser().getEmail()
         );
     }
     @Transactional
@@ -212,7 +218,9 @@ public class LoanApplicationService {
                 savedApplication.getPurpose(),
                 savedApplication.getStatus(),
                 savedApplication.getRemarks(),
-                savedApplication.getAppliedAt()
+                savedApplication.getAppliedAt(),
+                application.getUser().getFullname(),
+                application.getUser().getEmail()
         );
     }
     public List<LoanApplicationResponseDTO> getAdminApplications(
@@ -220,8 +228,10 @@ public class LoanApplicationService {
 
         List<LoanApplication> applications =
                 status == null
-                        ? loanApplicationRepository.findAll()
-                        : loanApplicationRepository.findByStatus(status);
+                        ? loanApplicationRepository
+                        .findAllByOrderByAppliedAtDesc()
+                        : loanApplicationRepository
+                        .findByStatusOrderByAppliedAtDesc(status);
 
         return applications.stream()
                 .map(application -> new LoanApplicationResponseDTO(
@@ -234,7 +244,9 @@ public class LoanApplicationService {
                         application.getPurpose(),
                         application.getStatus(),
                         application.getRemarks(),
-                        application.getAppliedAt()
+                        application.getAppliedAt(),
+                        application.getUser().getFullname(),
+                        application.getUser().getEmail()
                 ))
                 .toList();
     }

@@ -27,4 +27,6 @@ public class LoanApplicationResponseDTO {
     private LoanApplicationStatus status;
     private String remarks;
     private LocalDateTime appliedAt;
+    private String applicantName;
+    private String applicantEmail;
 }

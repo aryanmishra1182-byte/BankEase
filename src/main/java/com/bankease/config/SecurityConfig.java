@@ -1,6 +1,5 @@
 package com.bankease.config;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;

@@ -24,7 +24,7 @@ public interface LoanApplicationRepository
             Users user
     );
 
-    List<LoanApplication> findByStatus(LoanApplicationStatus status);
+    List<LoanApplication> findByStatusOrderByAppliedAtDesc(LoanApplicationStatus status);
     Optional<LoanApplication> findByApplicationReference(
             String applicationReference);
     @Lock(LockModeType.PESSIMISTIC_WRITE)
@@ -35,4 +35,5 @@ public interface LoanApplicationRepository
     Optional<LoanApplication> findByApplicationReferenceForUpdate(
             @Param("applicationReference") String applicationReference
     );
+    List<LoanApplication> findAllByOrderByAppliedAtDesc();
 }
