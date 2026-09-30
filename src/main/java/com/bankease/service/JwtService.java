@@ -16,21 +16,6 @@ private final JwtEncoder jwtEncoder;
     public JwtService(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
     }
-    public String generateTokens(Users users){
-        Instant now = Instant.now();
-        JwtClaimsSet claims = JwtClaimsSet.builder()
-                .subject(users.getEmail())
-                .claim("userId", users.getId())
-                .claim("role", users.getRole())
-                .issuedAt(now)
-                .expiresAt(now.plus(1, ChronoUnit.HOURS))
-                .build();
-
-        return jwtEncoder
-                .encode(JwtEncoderParameters.from(claims))
-                .getTokenValue();
-    }
-
     public String generateToken(Users user) {
 
         Instant now = Instant.now();

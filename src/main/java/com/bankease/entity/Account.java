@@ -16,14 +16,21 @@ public class Account {
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Column(unique = true)
-    String accountNumber;
+    @Column(nullable = false, unique = true)
+    private String accountNumber;
+
     @Enumerated(EnumType.STRING)
-    AccountType accountType;
-    BigDecimal balance;
+    @Column(nullable = false)
+    private AccountType accountType;
+
+    @Column(nullable = false, precision = 19, scale = 2)
+    private BigDecimal balance;
+
     @Enumerated(EnumType.STRING)
-    AccountStatus status;
+    @Column(nullable = false)
+    private AccountStatus status;
+
     @ManyToOne
-            @JoinColumn(name="user_id")
-    Users user;
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 }
