@@ -7,6 +7,7 @@ import com.bankease.entity.Biller;
 import com.bankease.entity.BillerStatus;
 import com.bankease.exception.BillerNotFoundException;
 import com.bankease.repository.BillerRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class BillerService {
         this.billerRepository = billerRepository;
         this.auditLogService = auditLogService;
     }
-
+@Transactional
     public BillerResponseDTO createBiller(
             BillerRequestDTO request,
             String performedBy) {
@@ -77,7 +78,7 @@ public class BillerService {
                 biller.getStatus()
         );
     }
-
+@Transactional
     public BillerResponseDTO updateBillerStatus(
             Integer id,
             BillerStatus status,

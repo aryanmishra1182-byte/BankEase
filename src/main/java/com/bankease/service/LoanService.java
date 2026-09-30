@@ -45,7 +45,8 @@ public class LoanService {
 
         LoanApplication application =
                 loanApplicationRepository
-                        .findByApplicationReference(applicationReference)
+                        .findByApplicationReferenceForUpdate(
+                                applicationReference)
                         .orElseThrow(() ->
                                 new LoanApplicationNotFoundException(
                                         "Loan Application Not Found"));

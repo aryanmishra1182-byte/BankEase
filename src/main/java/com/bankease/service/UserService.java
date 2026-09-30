@@ -105,7 +105,14 @@ return new LoginResponseDTO(users.getId(),users.getFullname(),users.getEmail(),u
                         new UserNotFoundException("User Not Found"));
 
         String newStatus = statusDTO.getStatus();
-
+        if (!"CUSTOMER".equals(user.getRole())) {
+            throw new IllegalArgumentException(
+                    "Only customer users can be managed");
+        }
+        if (user.getEmail().equalsIgnoreCase(performedBy)) {
+            throw new IllegalArgumentException(
+                    "You cannot change your own account status");
+        }
         if (!newStatus.equals("ACTIVE") &&
                 !newStatus.equals("INACTIVE")) {
 

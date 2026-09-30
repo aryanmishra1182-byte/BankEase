@@ -1,9 +1,6 @@
 package com.bankease.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class UserRequestDTO {
     @NotBlank
@@ -12,7 +9,8 @@ public class UserRequestDTO {
     @Email
   private  String email;
     @NotBlank
-  private  String phone;
+    @Pattern(regexp = "^[0-9]{10}$")
+    private String phone;
     @NotBlank
     @Size(min=8)
   private  String password;

@@ -132,7 +132,8 @@ public class LoanApplicationService {
 
         LoanApplication application =
                 loanApplicationRepository
-                        .findByApplicationReference(applicationReference)
+                        .findByApplicationReferenceForUpdate(
+                                applicationReference)
                         .orElseThrow(() ->
                                 new LoanApplicationNotFoundException(
                                         "Loan Application Not Found"));
@@ -213,6 +214,29 @@ public class LoanApplicationService {
                 savedApplication.getRemarks(),
                 savedApplication.getAppliedAt()
         );
+    }
+    public List<LoanApplicationResponseDTO> getAdminApplications(
+            LoanApplicationStatus status) {
+
+        List<LoanApplication> applications =
+                status == null
+                        ? loanApplicationRepository.findAll()
+                        : loanApplicationRepository.findByStatus(status);
+
+        return applications.stream()
+                .map(application -> new LoanApplicationResponseDTO(
+                        application.getId(),
+                        application.getApplicationReference(),
+                        application.getLoanType(),
+                        application.getRequestedAmount(),
+                        application.getApprovedAmount(),
+                        application.getTenureMonths(),
+                        application.getPurpose(),
+                        application.getStatus(),
+                        application.getRemarks(),
+                        application.getAppliedAt()
+                ))
+                .toList();
     }
 
 }

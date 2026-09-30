@@ -8,7 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class LoginResponseDTO {
-    @NotBlank
 private int id;
 private String fullname;
 private String email;

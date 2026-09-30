@@ -15,9 +15,17 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "bill_payments")
+@Table(
+        name = "bill_payments",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_bill_payment_account_idempotency",
+                        columnNames = {"account_id", "idempotency_key"}
+                )
+        }
+)
 public class BillPayment {
-    @NotBlank
+    @Column(nullable = false)
     private String idempotencyKey;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

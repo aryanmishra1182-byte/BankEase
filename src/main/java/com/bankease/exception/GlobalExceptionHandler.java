@@ -99,4 +99,12 @@ public class GlobalExceptionHandler{
                 .status(HttpStatus.BAD_REQUEST)
                 .body(exception.getMessage());
     }
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<String> handleIllegalState(
+            IllegalStateException exception) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exception.getMessage());
+    }
 }
