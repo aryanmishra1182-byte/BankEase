@@ -1,0 +1,19 @@
+package com.bankease.entity;
+
+public enum AuditAction {
+
+    ACCOUNT_BLOCKED,
+    ACCOUNT_ACTIVATED,
+
+    ACCOUNT_DEPOSIT,
+
+    BILLER_CREATED,
+    BILLER_ACTIVATED,
+    BILLER_DEACTIVATED,
+
+    LOAN_APPROVED,
+    LOAN_REJECTED,
+    LOAN_DISBURSED,
+    USER_ACTIVATED,
+    USER_DEACTIVATED
+}
