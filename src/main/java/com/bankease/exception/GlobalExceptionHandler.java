@@ -91,9 +91,9 @@ public class GlobalExceptionHandler{
     public ResponseEntity<String>handleLoanAlreadyDisbursed(LoanAlreadyDisbursedException exception){
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Loan Already Disbursed");
     }
-    @ExceptionHandler(IllegalArgumentException.class)
+    @ExceptionHandler(java.lang.IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgument(
-            IllegalArgumentException exception) {
+            java.lang.IllegalArgumentException exception) {
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)

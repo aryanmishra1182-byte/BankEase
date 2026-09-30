@@ -102,7 +102,7 @@ return accounts.stream()
             String performedBy) {
 
         Account account = accountRepository
-                .findByAccountNumber(accountNumber)
+                .findByAccountNumberForUpdate(accountNumber)
                 .orElseThrow(() ->
                         new AccountNotFoundException("Account Not Found"));
 

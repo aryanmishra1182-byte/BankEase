@@ -4,6 +4,7 @@ import com.bankease.dto.AccountRequestDTO;
 import com.bankease.dto.AccountResponseDTO;
 import com.bankease.service.AccountService;
 import com.bankease.entity.Account;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -20,7 +21,9 @@ public class AccountController {
     }
 
     @PostMapping("/accounts")
-    public ResponseEntity<AccountResponseDTO> createAccount(@RequestBody AccountRequestDTO request,@AuthenticationPrincipal Jwt jwt){
+    public ResponseEntity<AccountResponseDTO> createAccount(
+            @Valid @RequestBody AccountRequestDTO request,
+            @AuthenticationPrincipal Jwt jwt){
         String email=jwt.getSubject();
         AccountResponseDTO savedAccount=accountService.saveAccount(request,email);
       return  ResponseEntity.ok(savedAccount);
