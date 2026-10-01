@@ -1,271 +1,305 @@
-🏦 BankEase — NextGen Net Banking
+<div align="center">
 
-<p align="center">
-  <strong>A full-stack digital banking platform built with Spring Boot, PostgreSQL and React.</strong>
-</p>
+🏦 BankEase
 
-<p align="center">
-  <a href="#-overview">Overview</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-architecture">Architecture</a> •
-  <a href="#-modules">Modules</a> •
-  <a href="#-security">Security</a> •
-  <a href="#-setup">Setup</a> •
-  <a href="#-api-surface">API</a>
-</p>
+NextGen Net Banking
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-25-111827?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 25"/>
-  <img src="https://img.shields.io/badge/Spring%20Boot-4.x-123524?style=for-the-badge&logo=springboot&logoColor=6DB33F" alt="Spring Boot"/>
-  <img src="https://img.shields.io/badge/Spring%20Security-JWT-17202A?style=for-the-badge&logo=springsecurity&logoColor=6DB33F" alt="Spring Security"/>
-  <img src="https://img.shields.io/badge/PostgreSQL-Database-1F2937?style=for-the-badge&logo=postgresql&logoColor=4169E1" alt="PostgreSQL"/>
-  <img src="https://img.shields.io/badge/React-Frontend-111827?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/>
-  <img src="https://img.shields.io/badge/Vite-Frontend%20Tooling-111827?style=for-the-badge&logo=vite&logoColor=646CFF" alt="Vite"/>
-</p>
+A full-stack banking workspace built around real account, transaction, bill-payment and loan workflows.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/REST-API-8B5E34?style=flat-square" alt="REST API"/>
-  <img src="https://img.shields.io/badge/JPA-Hibernate-596E79?style=flat-square" alt="JPA Hibernate"/>
-  <img src="https://img.shields.io/badge/Maven-Build-C71A36?style=flat-square&logo=apachemaven&logoColor=white" alt="Maven"/>
-  <img src="https://img.shields.io/badge/BCrypt-Password%20Hashing-6B7A4F?style=flat-square" alt="BCrypt"/>
-</p>
+<br/>
 
-✦ Overview
+<a href="https://github.com/aryanmishra1182-byte/bankease">
+  <img src="https://img.shields.io/badge/Repository-BankEase-161a16?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a>
+<img src="https://img.shields.io/badge/Java-25-161a16?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 25"/>
+<img src="https://img.shields.io/badge/Spring%20Boot-4.x-161a16?style=for-the-badge&logo=springboot&logoColor=6DB33F" alt="Spring Boot"/>
+<img src="https://img.shields.io/badge/PostgreSQL-161a16?style=for-the-badge&logo=postgresql&logoColor=4169E1" alt="PostgreSQL"/>
+<img src="https://img.shields.io/badge/React-Vite-161a16?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/>
 
-BankEase is a full-stack net-banking application designed around two operational experiences:
+<br/><br/>
 
-Role
+<table>
+<tr>
+<td><b>👤 CUSTOMER</b><br/>Accounts · Transfers · Bills · Loans · Statements</td>
+<td><b>🛡️ ADMIN</b><br/>Users · Accounts · Billers · Loan Desk · Audit</td>
+</tr>
+</table>
 
-Purpose
+</div>
 
-👤 CUSTOMER
+✦ The idea
 
-Personal banking: accounts, transfers, bills, loans and statements
+BankEase is a full-stack web-based net-banking application with two protected workspaces: a customer banking workspace and an administrator control plane.
 
-🛡️ ADMIN
+The backend is built with Java + Spring Boot + Spring Security + JWT + Spring Data JPA/Hibernate + PostgreSQL, while the frontend uses React + Vite + JavaScript + CSS.
 
-Operational banking: users, accounts, billers, loan review, disbursement and audits
+The application connects its banking operations into one end-to-end flow:
 
-The backend exposes REST APIs through Spring Boot. The React frontend consumes those APIs and provides separate customer and administrative workspaces.
+SIGN UP
+   ↓
+LOGIN
+   ↓
+OPEN ACCOUNT
+   ↓
+FUND ACCOUNT
+   ↓
+TRANSFER MONEY
+   ↓
+PAY BILL
+   ↓
+APPLY FOR LOAN
+   ↓
+ADMIN REVIEW
+   ↓
+DISBURSE
+   ↓
+REPAY
+   ↓
+AUDIT TRAIL
 
-Scope note: BankEase does not contain an Investment module.
+Scope boundary: Investment services are intentionally not part of the delivered BankEase implementation.
 
-✦ What BankEase Covers
+◈ What makes the project different
 
-                        BANKEASE
-                           │
-             ┌─────────────┴─────────────┐
-             │                           │
-         CUSTOMER                     ADMIN
-             │                           │
-      ┌──────┼──────┐            ┌───────┼────────┐
-      │      │      │            │       │        │
-   Accounts Bills  Loans       Users   Accounts  Billers
-      │      │      │            │       │        │
- Transfers  Pay   Repay       Status   Deposit  Status
-      │             │
- Transactions      Loan Desk
-                    │
-             Review → Disburse
-                    │
-                 Audit Log
+<table>
+<tr>
+<td width="50%">
 
-◈ Features
+🔐 Security is part of the workflow
 
-👤 Customer Workspace
+BCrypt password hashing
 
-🔐 Customer registration and login
+JWT-authenticated sessions
 
-🎫 JWT-based authenticated sessions
+ADMIN / CUSTOMER role boundaries
 
-💳 Account viewing and balance visibility
+DTO validation
 
-🔁 Fund transfers between accounts
+Centralized exception handling
 
-🧾 Transaction history
+Server-side ownership checks
 
-🔎 Transaction search and filtering
+</td>
+<td width="50%">
 
-🏪 Biller browsing
+💰 Money movement is treated as a business operation
 
-💸 Bill payments
+Transfers are validated for:
 
-📋 Bill payment history
+sender ownership
 
-🏠 Loan applications
+account status
 
-📌 Loan application status
+receiver existence
 
-💰 Loan disbursement visibility
+same-account protection
 
-💵 Loan repayments
+sufficient balance
 
-📚 Repayment history
+duplicate-request protection
 
-📄 Account statement view
+transactional balance updates
 
-🖨️ Print-friendly statement experience
+</td>
+</tr>
+<tr>
+<td>
 
-📥 Statement-oriented export functionality
+🏦 Banking operations are connected
 
-☎️ Integrated support contact
+A customer action can create an administrative action:
 
-🛡️ Admin Workspace
+Customer Loan
+     ↓
+Pending Queue
+     ↓
+Admin Review
+     ↓
+Approved / Rejected
+     ↓
+Disbursement
+     ↓
+Customer Repayment
 
-👥 Customer management
+</td>
+<td>
 
-🔒 User status management
+🧾 Administration is traceable
 
-🏦 Account administration
+Important administrative activity is exposed through the audit workspace, including actions such as:
 
-💰 Account deposits
+ACCOUNT_DEPOSIT
+BILLER_CREATED
+LOAN_APPROVED
+USER_ACTIVATED
+USER_DEACTIVATED
 
-🏪 Biller administration
+</td>
+</tr>
+</table>
 
-✅ Biller activation/deactivation
-
-📝 Loan application review
-
-✔️ Loan approval/rejection
-
-💸 Approved loan disbursement
-
-🧾 Audit log visibility
-
-📊 Operational dashboard
-
-◈ Modules
+◈ Module Map
 
 #
 
 Module
 
-Main Responsibilities
+Customer
+
+Admin
+
+Core responsibility
 
 01
 
-User Management
+User Management & Authentication
 
-Registration, authentication, roles, status
+✓
+
+✓
+
+Registration, login, roles, status and JWT session
 
 02
 
 Account Management
 
-Accounts, balances, status and administration
+✓
+
+✓
+
+Account creation, balances, status and admin funding
 
 03
 
-Transactions
+Fund Transfer & Transactions
 
-Fund transfers and transaction history
+✓
+
+—
+
+Validated money transfers and transaction history
 
 04
 
 Bill Payment
 
-Biller browsing and payment workflows
+✓
+
+—
+
+Biller discovery, payment processing and history
 
 05
 
 Biller Management
 
-Administrative biller control
+—
+
+✓
+
+Create and activate/deactivate billers
 
 06
 
 Loan Management
 
-Application, review, disbursement and repayment
+✓
+
+✓
+
+Apply → review → approve/reject → disburse → repay
 
 07
 
 Audit & Administration
 
-Administrative actions and audit visibility
+—
+
+✓
+
+Operational controls and audit visibility
 
 ◈ Architecture
 
 flowchart TB
-    UI["React + Vite Frontend"]
-    AUTH["JWT / Role-aware Security"]
+
+    U["Customer / Admin"]
+    FE["React + Vite Frontend"]
+    JWT["Spring Security<br/>JWT + Role Authorization"]
     API["Spring Boot REST API"]
-    CTRL["Controllers"]
-    SERVICE["Services"]
-    REPO["Spring Data JPA Repositories"]
+
+    C["Controllers"]
+    S["Services<br/>Business Rules"]
+    R["Repositories<br/>Spring Data JPA"]
     DB[("PostgreSQL")]
 
-    UI -->|REST / JSON| AUTH
-    AUTH --> API
-    API --> CTRL
-    CTRL --> SERVICE
-    SERVICE --> REPO
-    REPO --> DB
+    U --> FE
+    FE -->|REST / JSON| JWT
+    JWT --> API
+    API --> C
+    C --> S
+    S --> R
+    R --> DB
 
-Layered Backend
+Request path
 
-┌──────────────────────────────────────┐
-│            React Frontend            │
-└──────────────────┬───────────────────┘
-                   │ REST / JSON
-                   ▼
-┌──────────────────────────────────────┐
-│        Spring Boot Controllers       │
-└──────────────────┬───────────────────┘
-                   ▼
-┌──────────────────────────────────────┐
-│             Services                 │
-│       Business Rules + Logic         │
-└──────────────────┬───────────────────┘
-                   ▼
-┌──────────────────────────────────────┐
-│     Spring Data JPA Repositories     │
-└──────────────────┬───────────────────┘
-                   ▼
-┌──────────────────────────────────────┐
-│             PostgreSQL               │
-└──────────────────────────────────────┘
+React UI
+   │
+   │ HTTP + JSON
+   ▼
+Spring Security
+   │
+   ├── JWT validation
+   └── role authorization
+   │
+   ▼
+Controller
+   │
+   ▼
+Service
+   │
+   ├── business validation
+   ├── ownership checks
+   ├── status checks
+   └── transactional operations
+   │
+   ▼
+Repository
+   │
+   ▼
+PostgreSQL
 
-◈ Security
+◈ Security Model
 
-BankEase uses Spring Security + JWT with role-aware authorization.
+BankEase separates authentication, authorization, validation, and business rules.
 
-Authentication flow
+flowchart LR
+    L["Login"] --> V["Verify BCrypt password"]
+    V --> J["Issue JWT"]
+    J --> R["Attach Bearer token"]
+    R --> A["Validate JWT"]
+    A --> ROLE{"Role?"}
+    ROLE -->|CUSTOMER| C["Customer endpoints"]
+    ROLE -->|ADMIN| AD["Admin endpoints"]
 
-sequenceDiagram
-    participant C as Customer
-    participant F as React Frontend
-    participant S as Spring Security
-    participant A as Auth Service
-    participant DB as PostgreSQL
-
-    C->>F: Submit email + password
-    F->>A: POST /login
-    A->>DB: Find user
-    DB-->>A: User + BCrypt hash
-    A->>A: Verify password
-    A-->>F: JWT + user data
-    F->>S: Bearer JWT
-    S->>S: Validate token + role
-    S-->>F: Authorized request
-
-Role boundaries
+Access boundaries
 
 PUBLIC
- ├── POST /users
- └── POST /login
+├── POST /users
+└── POST /login
 
 CUSTOMER
- ├── /accounts/**
- ├── /transactions/**
- ├── /bills/**
- └── /loans/**
+├── /accounts/**
+├── /transactions/**
+├── /bills/**
+└── /loans/**
 
 ADMIN
- └── /admin/**
+└── /admin/**
 
 AUTHENTICATED
- └── /billers/**
+└── /billers/**
 
 Security mechanisms
 
@@ -275,241 +309,323 @@ Security mechanisms
 
 🧩 Role-based authorization
 
-🚫 Protected administrative routes
-
 ✅ Bean validation
 
 🧯 Centralized exception handling
 
 🔑 Environment-based secret configuration
 
-Credentials and secrets should be provided through environment variables or IntelliJ Run/Debug configuration and should not be committed to GitHub.
+🛡️ Business-level ownership and balance checks
 
-◈ Loan Lifecycle
+◈ Customer Experience
 
-flowchart LR
-    P["PENDING"] -->|Review| D{"Decision"}
-    D -->|Approve| A["APPROVED"]
-    D -->|Reject| R["REJECTED"]
-    A --> X["DISBURSED"]
-    X --> L["ACTIVE"]
-    L --> RP["REPAYMENTS"]
+01 — Identity
 
-Business checks include
+Registration
+    ↓
+Validation
+    ↓
+Customer record
+    ↓
+CUSTOMER + ACTIVE
+    ↓
+Login
+    ↓
+JWT session
 
-An already reviewed application cannot be reviewed again.
+02 — Accounts
 
-Approval requires a valid positive approved amount.
+Open account
+    ↓
+SAVINGS / CURRENT
+    ↓
+Unique account number
+    ↓
+ACTIVE + ₹0 initial balance
+    ↓
+View account / statement
 
-Approved amount cannot exceed requested amount.
+03 — Transfer
 
-A rejected application does not retain an approved amount.
+Choose sender
+      ↓
+Enter receiver
+      ↓
+Enter amount
+      ↓
+Backend validation
+      ↓
+Ownership + status + balance checks
+      ↓
+Transactional balance update
+      ↓
+Transaction record
 
-Disbursement requires an approved application.
+04 — Bills
 
-Repayment is restricted according to loan state and amount rules.
+Choose active biller
+      ↓
+Enter consumer reference
+      ↓
+Enter amount
+      ↓
+Validate payment
+      ↓
+Debit account
+      ↓
+Persist bill payment
+      ↓
+Receipt / history
 
-◈ Domain Model
+◈ Loan Desk
 
-erDiagram
-    USERS ||--o{ ACCOUNT : owns
-    USERS ||--o{ TRANSACTION : performs
-    USERS ||--o{ LOAN_APPLICATION : submits
-    ACCOUNT ||--o{ TRANSACTION : records
-    ACCOUNT ||--o{ BILL_PAYMENT : makes
-    ACCOUNT ||--o{ LOAN : receives
-    LOAN_APPLICATION ||--o| LOAN : becomes
-    LOAN ||--o{ LOAN_REPAYMENT : receives
-    BILLER ||--o{ BILL_PAYMENT : receives
-    USERS ||--o{ AUDIT_LOG : associated
+Loan processing is the longest connected workflow in the application.
 
-Primary domain entities include:
+stateDiagram-v2
+    [*] --> PENDING
+    PENDING --> APPROVED
+    PENDING --> REJECTED
+    APPROVED --> DISBURSED
+    DISBURSED --> ACTIVE
+    ACTIVE --> REPAYMENT
+    REPAYMENT --> ACTIVE
+    REPAYMENT --> CLOSED
+    REJECTED --> [*]
+    CLOSED --> [*]
+
+Customer side
+
+Loan type
+   +
+Requested amount
+   +
+Tenure
+   +
+Purpose
+       ↓
+Create application
+       ↓
+PENDING
+
+Admin side
+
+Loan Desk
+    ↓
+Pending application
+    ↓
+Review applicant
+    ↓
+APPROVED / REJECTED
+    ↓
+If approved → DISBURSE
+
+Repayment side
+
+ACTIVE loan
+     ↓
+Repayment request
+     ↓
+Validate amount + status + account
+     ↓
+Reduce outstanding amount
+     ↓
+Continue ACTIVE
+       OR
+     CLOSE
+
+◈ Admin Control Plane
+
+The admin workspace is the operational layer over the customer-facing system.
+
+Admin area
+
+What it controls
+
+Overview
+
+Registered users, active billers, pending loans, audit signals
 
 Users
-Account
-Transaction
-Biller
-BillPayment
-LoanApplication
-Loan
-LoanRepayment
-AuditLog
 
-◈ Technology Stack
+Customer access and active/inactive status
 
-Backend
+Accounts
 
-Technology
+Account status and development funding
 
-Role
+Billers
 
-☕ Java 25
+Creation and ACTIVE / INACTIVE status
 
-Application language
+Loan Desk
 
-🌱 Spring Boot
+Pending queue, application review and disbursement
 
-Backend framework
+Audit Center
 
-🌐 Spring Web
-
-REST API layer
-
-🔐 Spring Security
-
-Authentication and authorization
-
-🎫 JWT
-
-Stateless authentication
-
-🗃️ Spring Data JPA
-
-Persistence
-
-🧩 Hibernate
-
-ORM
-
-🐘 PostgreSQL
-
-Database
-
-🔒 BCrypt
-
-Password hashing
-
-📦 Maven
-
-Build/dependency management
-
-Frontend
-
-Technology
-
-Role
-
-⚛️ React
-
-UI layer
-
-⚡ Vite
-
-Development/build tooling
-
-🟨 JavaScript
-
-Frontend logic
-
-🎨 CSS
-
-Visual system
-
-✦ Lucide
-
-Interface icons
+Read-only visibility of important admin actions
 
 ◈ Frontend Experience
 
-The frontend follows a distinctive Ledger Noir design language:
+The interface uses a Ledger Noir visual language instead of a conventional blue fintech dashboard.
 
-CHARCOAL  ██████████
-IVORY     ██████████
-COPPER    ██████████
-OLIVE     ██████████
+CHARCOAL   → workspace / depth
+IVORY      → information / hierarchy
+COPPER     → action / attention
+OLIVE      → healthy system state
 
-Design principles
+Customer workspace
 
-Editorial rather than generic SaaS styling
+Overview
+Accounts
+Transfer
+Bills & Pay
+Loans
+Activity
+Statement
 
-High-readability financial typography
+Admin workspace
 
-Warm financial-document palette
+Overview
+Users
+Accounts
+Billers
+Loan Desk
+Audit Center
 
-Minimal rounded containers
+The frontend also includes interactive filtering, statement presentation, responsive layouts and support contact information.
 
-Transaction-oriented information hierarchy
+◈ Backend Structure
 
-Responsive customer/admin workspaces
+src/main/java/com/bankease/
+│
+├── config/
+│   ├── SecurityConfig
+│   └── AdminDataInitializer
+│
+├── controller/
+│   ├── UserController
+│   ├── AccountController
+│   ├── TransactionController
+│   ├── BillPaymentController
+│   ├── BillerController
+│   ├── LoanApplicationController
+│   ├── LoanController
+│   └── Admin* controllers
+│
+├── dto/
+│
+├── entity/
+│   ├── Users
+│   ├── Account
+│   ├── Transaction
+│   ├── Biller
+│   ├── BillPayment
+│   ├── LoanApplication
+│   ├── Loan
+│   ├── LoanRepayment
+│   └── AuditLog
+│
+├── exception/
+│   └── GlobalExceptionHandler
+│
+├── repository/
+│
+└── service/
+    ├── UserService
+    ├── AccountService
+    ├── TransactionService
+    ├── BillPaymentService
+    ├── BillerService
+    ├── LoanApplicationService
+    ├── LoanService
+    ├── AuditLogService
+    └── JwtService
 
-Interactive drawers, receipts and detail views
+◈ Technology Stack
 
-Statement-oriented presentation
+Layer
 
-◈ Customer Flow
+Technology
 
-flowchart TD
-    L["Login / Sign up"] --> O["Customer Overview"]
-    O --> A["Accounts"]
-    O --> T["Transfer"]
-    O --> B["Bills & Pay"]
-    O --> LO["Loans"]
-    O --> ST["Statement"]
-    O --> AC["Activity"]
+Language
 
-    T --> TX["Transaction Record"]
-    B --> BP["Bill Payment Record"]
-    LO --> LA["Loan Application"]
-    LA --> LS["Loan Status"]
-    LS --> LD["Loan Disbursement"]
-    LD --> LR["Loan Repayment"]
+Java 25
 
-◈ Admin Flow
+Backend
 
-flowchart TD
-    AL["Admin Login"] --> AO["Admin Overview"]
+Spring Boot
 
-    AO --> U["Users"]
-    AO --> AC["Accounts"]
-    AO --> BI["Billers"]
-    AO --> LD["Loan Desk"]
-    AO --> AU["Audit Center"]
+Security
 
-    LD --> REV["Review Application"]
-    REV --> AP["Approve"]
-    REV --> RJ["Reject"]
-    AP --> DIS["Disburse Loan"]
+Spring Security + JWT
+
+Persistence
+
+Spring Data JPA / Hibernate
+
+Database
+
+PostgreSQL
+
+Password hashing
+
+BCrypt
+
+Frontend
+
+React + Vite
+
+Client logic
+
+JavaScript
+
+Styling
+
+CSS
+
+Backend build
+
+Maven
+
+Frontend tooling
+
+npm / Vite
+
+Version control
+
+Git / GitHub
 
 ◈ API Surface
-
-Endpoint availability should be treated as the source-code contract and checked against the current controllers in this repository.
 
 Authentication
 
 POST /users
 POST /login
 
-Accounts
+Customer
 
-GET /accounts
-GET /accounts/{accountNumber}
-
-Transactions
+GET  /accounts
+GET  /accounts/{accountNumber}
 
 GET  /transactions
 GET  /transactions/{reference}
 POST /transactions/transfer
 
-Billers / Bills
-
 GET  /billers
 GET  /bills/payments
 POST /bills/payments
 
-Loan Applications
-
 POST /loans/applications
 GET  /loans/applications
 GET  /loans/applications/{applicationReference}
-
-Loans
 
 GET  /loans
 GET  /loans/{loanReference}
 POST /loans/{loanReference}/repay
 GET  /loans/{loanReference}/repayments
 
-Administration
+Admin
 
 GET   /admin/users
 GET   /admin/accounts
@@ -528,13 +644,29 @@ PATCH /admin/loans/applications/{applicationReference}/status
 
 POST /admin/loans/applications/{applicationReference}/disburse
 
-◈ Exception Handling
+The controller layer in the repository remains the authoritative API contract.
 
-The backend centralizes application errors using:
+◈ Domain Relationships
+
+erDiagram
+    USERS ||--o{ ACCOUNT : owns
+    USERS ||--o{ TRANSACTION : initiates
+    USERS ||--o{ LOAN_APPLICATION : submits
+    ACCOUNT ||--o{ TRANSACTION : participates
+    ACCOUNT ||--o{ BILL_PAYMENT : funds
+    ACCOUNT ||--o{ LOAN : receives
+    BILLER ||--o{ BILL_PAYMENT : receives
+    LOAN_APPLICATION ||--o| LOAN : becomes
+    LOAN ||--o{ LOAN_REPAYMENT : receives
+    USERS ||--o{ AUDIT_LOG : associated
+
+◈ Error Handling
+
+BankEase centralizes API exception handling with:
 
 @RestControllerAdvice
 
-The application contains dedicated exceptions for areas including:
+Representative domain exceptions include:
 
 UserNotFoundException
 AccountNotFoundException
@@ -556,44 +688,9 @@ LoanAlreadyDisbursedException
 InvalidLoanRepaymentException
 ApplicationNotApprovedException
 
-This keeps error behavior consistent across the API.
+The frontend can therefore represent controlled error states instead of exposing raw server failures.
 
-◈ Project Structure
-
-bankease/
-│
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/
-│       │       └── bankease/
-│       │           ├── config/
-│       │           ├── controller/
-│       │           ├── dto/
-│       │           ├── entity/
-│       │           ├── exception/
-│       │           ├── repository/
-│       │           └── service/
-│       │
-│       └── resources/
-│           └── application.properties
-│
-├── bankease_frontend/
-│   ├── src/
-│   │   ├── main.jsx
-│   │   ├── api.js
-│   │   └── styles.css
-│   ├── index.html
-│   ├── package.json
-│   └── package-lock.json
-│
-├── pom.xml
-├── mvnw
-├── mvnw.cmd
-├── .gitignore
-└── README.md
-
-◈ Getting Started
+◈ Quick Start
 
 Requirements
 
@@ -610,60 +707,51 @@ Git
 git clone https://github.com/aryanmishra1182-byte/bankease.git
 cd bankease
 
-2. Create PostgreSQL database
+2. Database
+
+Create the PostgreSQL database:
 
 CREATE DATABASE bankease;
 
-Default local connection expected by the application:
+Typical local configuration:
 
 Host:     localhost
 Port:     5432
 Database: bankease
 Username: postgres
 
-3. Configure environment variables
+3. Environment Variables
 
-Set these through IntelliJ Run/Debug configuration, your shell, or another secure local mechanism:
+Configure locally through IntelliJ Run/Debug Configuration, a secure shell environment, or another secret-management mechanism:
 
 DB_PASSWORD=your_postgres_password
 JWT_SECRET=your_long_random_secret
 ADMIN_EMAIL=admin@bankease.com
 ADMIN_PASSWORD=your_admin_password
 
-Example application.properties references:
+Never commit real credentials or secrets.
 
-spring.datasource.password=${DB_PASSWORD}
-jwt.secret=${JWT_SECRET}
-admin.email=${ADMIN_EMAIL:admin@bankease.com}
-admin.password=${ADMIN_PASSWORD}
+4. Start Backend
 
-Never commit
-
-.env
-real passwords
-JWT secrets
-private keys
-production credentials
-
-◈ Run the Backend
-
-From the project root:
+From the repository root:
 
 Windows
 
 .\mvnw.cmd spring-boot:run
 
-Or use IntelliJ:
+Or run:
 
-Run → BankeaseApplication
+BankeaseApplication
+
+from IntelliJ IDEA.
 
 Backend:
 
 http://localhost:8080
 
-◈ Run the Frontend
+5. Start Frontend
 
-Open a second terminal:
+Open another terminal:
 
 cd bankease_frontend
 npm install
@@ -673,49 +761,37 @@ Frontend:
 
 http://localhost:5173
 
-◈ Recommended Test Sequence
+◈ Demo Path
 
-1. Start PostgreSQL
-        ↓
-2. Start Spring Boot
-        ↓
-3. Verify database connection
-        ↓
-4. Start React
-        ↓
-5. Create customer account
-        ↓
-6. Login as CUSTOMER
-        ↓
-7. Check accounts
-        ↓
-8. Test transfer
-        ↓
-9. Check transaction history
-        ↓
-10. Browse billers
-        ↓
-11. Pay a bill
-        ↓
-12. Apply for a loan
-        ↓
-13. Login as ADMIN
-        ↓
-14. Review application
-        ↓
-15. Approve / reject
-        ↓
-16. Disburse approved loan
-        ↓
-17. Login as CUSTOMER
-        ↓
-18. Repay loan
-        ↓
-19. Check repayment history
-        ↓
-20. Check audit records
+Use this sequence for a connected project demonstration:
 
-◈ Build Checks
+01  Register customer
+ ↓
+02  Login
+ ↓
+03  Open account
+ ↓
+04  Admin funds account
+ ↓
+05  Customer transfers funds
+ ↓
+06  Customer pays bill
+ ↓
+07  Customer applies for loan
+ ↓
+08  Admin opens Loan Desk
+ ↓
+09  Admin reviews application
+ ↓
+10  Admin approves / rejects
+ ↓
+11  Admin disburses approved loan
+ ↓
+12  Customer repays
+ ↓
+13  Admin opens Audit Center
+
+◈ Validation Checklist
 
 Backend
 
@@ -726,158 +802,197 @@ Frontend
 cd bankease_frontend
 npm run build
 
-A clean project should compile successfully before deployment or submission.
+Manual flow
 
-◈ Environment Separation
+[ ] PostgreSQL connected
+[ ] Backend starts successfully
+[ ] Customer registration works
+[ ] Login returns JWT
+[ ] Customer account creation works
+[ ] Admin funding works
+[ ] Transfer validation works
+[ ] Bill payment works
+[ ] Loan application works
+[ ] Admin review works
+[ ] Loan disbursement works
+[ ] Loan repayment works
+[ ] Audit records appear
 
-BankEase keeps sensitive configuration outside source control.
+◈ Repository Layout
 
-Source Code
-     │
-     ├── application.properties
-     │       └── references variables
-     │
-     ▼
-Environment
-     │
-     ├── DB_PASSWORD
-     ├── JWT_SECRET
-     ├── ADMIN_EMAIL
-     └── ADMIN_PASSWORD
+bankease/
+│
+├── src/
+├── bankease_frontend/
+├── pom.xml
+├── mvnw
+├── mvnw.cmd
+├── .gitignore
+└── README.md
 
-This lets the same codebase run with different local, testing and deployment credentials.
+◈ Project Status
 
-◈ Current Scope
+<div align="center">
 
-✅ Customer registration
-✅ Customer authentication
-✅ JWT authorization
-✅ User administration
-✅ Account administration
-✅ Account balances
-✅ Fund transfers
-✅ Transaction history
-✅ Biller browsing
-✅ Bill payments
-✅ Loan applications
-✅ Loan review
-✅ Loan approval/rejection
-✅ Loan disbursement
-✅ Loan repayment
-✅ Repayment history
-✅ Audit logs
-✅ Customer dashboard
-✅ Admin dashboard
-✅ Statement interface
-✅ Responsive frontend
-✅ Integrated support contact
+Area
 
-❌ Investment module
+Status
+
+Customer registration
+
+✅
+
+Authentication
+
+✅
+
+JWT security
+
+✅
+
+Account management
+
+✅
+
+Fund transfers
+
+✅
+
+Transaction history
+
+✅
+
+Bill payments
+
+✅
+
+Biller administration
+
+✅
+
+Loan applications
+
+✅
+
+Loan review
+
+✅
+
+Loan disbursement
+
+✅
+
+Loan repayment
+
+✅
+
+Audit visibility
+
+✅
+
+React customer workspace
+
+✅
+
+React admin workspace
+
+✅
+
+Statement interface
+
+✅
+
+Responsive UI
+
+✅
+
+</div>
 
 ◈ Future Scope
 
-Potential extensions, separate from the current implementation:
+Possible extensions beyond the current implementation:
 
-Multi-factor authentication
+📱 Mobile client using the existing REST layer
 
-Notification services
+☁️ Cloud deployment and CI/CD
 
-Automated test expansion
+🔔 Notification services
 
-Production observability
+🧪 Expanded automated integration/API testing
 
-External payment integrations
+🔗 External payment and biller integrations
 
-CI/CD
-
-Cloud deployment
-
-Advanced reporting
-
-These are not part of the current implementation unless added to the codebase.
+📈 Advanced operational reporting
 
 ◈ Screenshots
 
-Add real screenshots after the application is fully tested.
+Store project screenshots under:
 
-Recommended repository layout:
+docs/screenshots/
+
+Suggested layout:
 
 docs/
 └── screenshots/
     ├── login.png
-    ├── customer-dashboard.png
+    ├── signup.png
+    ├── customer-overview.png
     ├── accounts.png
     ├── transfer.png
     ├── bills.png
     ├── loans.png
-    ├── admin-loan-desk.png
+    ├── statement.png
+    ├── admin-overview.png
+    ├── users.png
+    ├── admin-accounts.png
+    ├── billers.png
+    ├── loan-desk.png
     └── audit-center.png
 
-Then embed them here:
+Then render them directly in GitHub:
 
-## Customer Dashboard
+## Customer Overview
 
-![Customer Dashboard](docs/screenshots/customer-dashboard.png)
+![BankEase Customer Overview](docs/screenshots/customer-overview.png)
 
 ## Admin Loan Desk
 
-![Admin Loan Desk](docs/screenshots/admin-loan-desk.png)
+![BankEase Admin Loan Desk](docs/screenshots/loan-desk.png)
 
-◈ Engineering Practices
+◈ Design Philosophy
 
-BankEase follows a layered backend architecture:
+A banking application should feel like a working financial desk, not a template dashboard.
 
-Controller
-    ↓
-Service
-    ↓
-Repository
-    ↓
-Database
+CHARCOAL
+Workspace
 
-Key practices include:
+        IVORY
+        Information
 
-DTO-based request/response handling
+                COPPER
+                Action
 
-Bean validation
+                        OLIVE
+                        Healthy state
 
-Centralized exception handling
-
-JWT-based authentication
-
-Role-based authorization
-
-BCrypt password hashing
-
-JPA entity relationships
-
-Transactional business operations
-
-Environment-based secrets
-
-Separate customer/admin UI flows
-
-◈ Repository
-
-GitHub
-
-👉 aryanmishra1182-byte/bankease
+BankEase uses this visual hierarchy to keep financial state, operational actions and system status visually distinct.
 
 👨‍💻 Author
+
+<div align="center">
 
 Aryan Mishra
 
 B.Tech — Computer Science & Engineering (Data Science)
 
-GitHub:
-https://github.com/aryanmishra1182-byte
+<a href="https://github.com/aryanmishra1182-byte">
+  <img src="https://img.shields.io/badge/GitHub-aryanmishra1182--byte-161a16?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
+</a>
 
-<p align="center">
-  <strong>BankEase — NextGen Net Banking</strong>
-  <br/>
-  Built with Java • Spring Boot • PostgreSQL • React
-</p>
+<br/><br/>
 
-<p align="center">
-  <sub>Full-stack academic project • REST architecture • JWT security • Role-based banking workflows</sub>
-</p>
+BankEase — NextGen Net Banking
+
+Java • Spring Boot • PostgreSQL • React
+
+</div>
